@@ -1,9 +1,20 @@
-class Emacs < Formula
+class EmacsJp < Formula
   desc "GNU Emacs text editor"
   homepage "https://www.gnu.org/software/emacs/"
   url "http://ftpmirror.gnu.org/emacs/emacs-24.5.tar.xz"
   mirror "https://ftp.gnu.org/gnu/emacs/emacs-24.5.tar.xz"
   sha256 "dd47d71dd2a526cf6b47cb49af793ec2e26af69a0951cc40e43ae290eacfc34e"
+
+  stable do
+    # "--japanese" option:
+    # to apply a patch from MacEmacsJP for Japanese input methods
+    patch do
+      url 'https://raw.githubusercontent.com/kskotetsu/emacs-24.4-inline-patch/master/emacs-24.4-inline.patch'
+      sha1 '68002d6aee95d3b1f99b42ff22e1384e7c686feb'
+    end if build.include? "japanese"
+    depends_on "autoconf" => :build if build.include? "japanese"
+    depends_on "automake" => :build if build.include? "japanese"
+  end
 
   bottle do
     revision 1
@@ -28,6 +39,7 @@ class Emacs < Formula
 
   option "with-cocoa", "Build a Cocoa version of emacs"
   option "with-ctags", "Don't remove the ctags executable that emacs provides"
+  option "japanese", "Better integration of japanese input methods"
   option "without-libxml2", "Don't build with libxml2 support"
 
   deprecated_option "cocoa" => "with-cocoa"
