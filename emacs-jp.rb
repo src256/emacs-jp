@@ -9,8 +9,7 @@ class EmacsJp < Formula
     # "--japanese" option:
     # to apply a patch from MacEmacsJP for Japanese input methods
     patch do
-      url 'https://raw.githubusercontent.com/kskotetsu/emacs-24.4-inline-patch/master/emacs-24.4-inline.patch'
-      sha1 '68002d6aee95d3b1f99b42ff22e1384e7c686feb'
+      url 'https://gist.githubusercontent.com/takaxp/1d91107b311b63b57529/raw/afcdd809e138a08c45a469e30aed9db0685aef3c/emacs-24.5-inline.patch'
     end if build.include? "japanese"
     depends_on "autoconf" => :build if build.include? "japanese"
     depends_on "automake" => :build if build.include? "japanese"
